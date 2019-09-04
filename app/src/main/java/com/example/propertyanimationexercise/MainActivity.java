@@ -3,6 +3,9 @@ package com.example.propertyanimationexercise;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
 
     private List<String> list;
@@ -29,13 +31,12 @@ public class MainActivity extends Activity {
         list = Arrays.asList(stringArray);
         RecyclerView animation = findViewById(R.id.animation_list);
 
-        System.out.println(list.size());
-        LinearLayoutManager  layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         animation.setLayoutManager(layoutManager);
 
         AnimationListAdapter animationListAdapter = new AnimationListAdapter();
         animation.setAdapter(animationListAdapter);
-        if(list!= null) {
+        if (list != null) {
             animationListAdapter.setList(list);
             animationListAdapter.notifyDataSetChanged();
         }
@@ -66,7 +67,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void onBindViewHolder(@NonNull AnimationListViewHolder animationListViewHolder, int i) {
-            System.out.print(animationList.get(i));
             animationListViewHolder.textView.setText(animationList.get(i));
         }
 
@@ -88,8 +88,27 @@ public class MainActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Toast toast = Toast.makeText(getApplicationContext(), textView.getText(), Toast.LENGTH_LONG);
-            toast.show();
+            String animationName = textView.getText().toString();
+
+            switch (animationName) {
+                case "PropertyAnimation":
+                    PropertyAnimation propertAnimationFragment = new PropertyAnimation();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container,propertAnimationFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                    break;
+                case "DrawableAnimation":
+                    DrawableAnimation animation = new DrawableAnimation();
+                    FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                    transaction2.replace(R.id.fragment_container,animation);
+                    transaction2.addToBackStack(null);
+                    transaction2.commit();
+                    break;
+                default:
+                    Toast toast = Toast.makeText(getApplicationContext(), textView.getText(), Toast.LENGTH_LONG);
+                    toast.show();
+            }
         }
     }
 

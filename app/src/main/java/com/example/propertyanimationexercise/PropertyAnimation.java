@@ -16,7 +16,8 @@ public class PropertyAnimation extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
-        final View view = inflater.inflate(R.layout.activity_main, container, false);
+        System.out.println("........");
+        final View view = inflater.inflate(R.layout.fargment_property_animation, container, false);
         return view;
 
     }

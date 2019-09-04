@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">PropertyAnimationExercise</string>
     <string name="intro">This is a playground for some animation effects. Select the Animation to see it.</string>
+    <string name="hint_for_property_animation">Click anywhere below to play</string>
 
     <string-array name="animation_list">
         <item>PropertyAnimation</item>
-        <item>test1</item>
+        <item>DrawableAnimation</item>
         <item>test2</item>
         <item>test3</item>
     </string-array>
